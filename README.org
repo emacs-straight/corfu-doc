@@ -1,0 +1,71 @@
+#+TITLE: corfu-doc - Documentation popup for Corfu
+#+AUTHOR: Yuwei Tian
+
+#+html: <a href="https://melpa.org/#/corfu-doc"><img alt="MELPA" src="https://melpa.org/packages/corfu-doc-badge.svg"/></a>
+
+* Introduction
+
+Display a documentation popup for completion candidate when using Corfu.
+It can be regarded as =company-quickhelp= for [[https://github.com/minad/corfu][Corfu]].
+
+[[https://github.com/galeo/corfu-doc/blob/screenshots/right.png?raw=true]]
+
+[[https://github.com/galeo/corfu-doc/blob/screenshots/left.png?raw=true]]
+
+* Installation
+
+Corfu-doc is available from [[https://melpa.org/#/corfu-doc][MELPA]], and can be
+installed via =package-install=. You can also manually install it via
+=package-install-file=.
+
+Enable it with =M-x corfu-doc-mode= or by using =corfu-mode-hook=:
+
+#+begin_src elisp
+(add-hook 'corfu-mode-hook #'corfu-doc-mode)
+#+end_src
+
+** Scroll the documentation
+
+Bind keys =M-p= and =M-n= to commands =corfu-doc-scroll-down= and
+=corfu-doc-scroll-up= to scroll the documentation.
+
+#+begin_src elisp
+(define-key corfu-map (kbd "M-p") #'corfu-doc-scroll-down) ;; corfu-next
+(define-key corfu-map (kbd "M-n") #'corfu-doc-scroll-up)  ;; corfu-previous
+#+end_src
+
+** Quickly toggle the documentation on or off
+
+Bind a key to quickly toggle the documentation popup on or off.
+
+#+begin_src elisp
+(define-key corfu-map (kbd "M-d") #'corfu-doc-toggle)
+#+end_src
+
+** Display the doc frame beyond the parent frame
+
+The doc frame is displayed within the parent frame by default.
+However, the position of the doc frame can be calculated base on the size of
+the display monitor if =corfu-doc-display-within-parent-frame= is set to =nil=.
+
+#+begin_quote
+Most window-systems clip a child frame at the native edges (see [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Frame-Geometry.html][Frame Geometry]])
+of its parent frame—everything outside these edges
+is usually invisible...
+
+NS builds do not clip child frames at the parent frame’s edges,
+allowing them to be positioned so they do not obscure the parent frame while
+still being visible themselves.
+#+end_quote
+
+Please see "(elisp) Child Frames" in Emacs manual for details.
+
+* Contributions
+
+This package will be packaged into corfu in the future as an
+extension([[https://github.com/galeo/corfu-doc/issues/8][#8]]),
+contributions require a copyright assignment to the FSF.
+
+* License
+
+GPLv3
